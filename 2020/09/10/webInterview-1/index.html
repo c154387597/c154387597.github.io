@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="CL">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="CL">
+    
+    <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    
+    <meta name="description" content="个人博客">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>前端基本知识（一） · chanBlog</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #0d3671 0, #0d3671 80px, #537cb7 80px, #537cb7 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href="/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href="/assets/favicon.ico">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js" as="script">
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <a class="home-link" href="/">chanBlog</a>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/">chanBlog</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">前端基本知识（一）</a>
+            </div>
+    </div>
+    
+    <div class="header-sidebar-menu">&#xe775;</div>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:50vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            前端基本知识（一）
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class="post-intro-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="web">web</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">3.1k</span>阅读时长: <span class="post-count reading-time">11 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2020/09/10</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h2 id="严格模式与混杂模式"><a href="#严格模式与混杂模式" class="headerlink" title="严格模式与混杂模式"></a>严格模式与混杂模式</h2><h3 id="Doctype作用"><a href="#Doctype作用" class="headerlink" title="Doctype作用"></a>Doctype作用</h3><blockquote>
+<p>Doctype：(Document Type)文档类型，&lt;!DOCTYPE&gt;声明叫做文件类型定义（DTD），它位于文档中最前面的位置，处于标签之前。如果你想制作符合标准的页面，一个必不可少的关键组成部分就是DOCTYPE的声明。确定了正确的Doctype，xhtml里面的标识和css才能正常生效(也就是说它会很负责地告诉浏览器怎么解释你的这个标签和你写的css)。既然它是一种声明，它的责任就是告诉浏览器文档使用哪种html或者xhtml规范。</p>
+<ul>
+<li>Doctype可声明三种DTD类型，分别表示严格版本、过渡版本以及基于框架的 HTML 文档</li>
+<li>当浏览器厂商开始创建与标准兼容的浏览器时，他们希望确保向后兼容性。为了实现这一点，他们创建了两种呈现模式：严格模式和混杂模式</li>
+<li>严格模式（标准模式）：指浏览器按照W3C标准解析代码；浏览器以其支持的最高标准呈现页面</li>
+<li>混杂模式（兼容模式，怪异模式）：指浏览器用自己的方式解析代码；页面以一种比较宽松的向后兼容的方式显示</li>
+</ul>
+</blockquote>
+<h3 id="如何区分严格模式和混杂模式"><a href="#如何区分严格模式和混杂模式" class="headerlink" title="如何区分严格模式和混杂模式"></a>如何区分严格模式和混杂模式</h3><ol>
+<li>如果XHTML、HTML 4.01文档包含形式完整的DOCTYPE，那么它一般以标准模式呈现。</li>
+<li>包含过渡DTD和URI的DOCTYPE也导致页面以标准模式呈现，但是有过渡DTD而没有URI会导致页面以混杂模式呈现。</li>
+<li>DOCTYPE不存在或形式不正确会导致HTML和XHTML文档以混杂模式呈现。</li>
+<li>html5既然没有DTD，也就没有严格模式与宽松模式的区别，html5有相对宽松的语法，实现时，已经尽可能大的实现了向后兼容。<br><strong>“ html5不基于SGML（标准通用标记语言），因此不需要对DTD进行引用，但是需要Doctype来规范浏览器行为。”</strong></li>
+</ol>
+<h3 id="严格模式与混杂模式的语句解析不同点"><a href="#严格模式与混杂模式的语句解析不同点" class="headerlink" title="严格模式与混杂模式的语句解析不同点"></a>严格模式与混杂模式的语句解析不同点</h3><ol>
+<li>标准模式下，一个元素的高度是由其包含的内容来决定的，如果父元素没有设置高度，子元素设置一个百分比的高度无效。</li>
+<li>标准模式下使用<code>margin: 0 auto;</code>可以使元素水平居中，但是在混杂模式下会失效；混杂模式下需要设置<code>text-align:center;</code>来进行水平居中。</li>
+<li>混杂模式下盒子模型的高宽包括<code>padding</code>和<code>border</code>，而W3C标准中设置一个元素的高宽指的是content的高宽。</li>
+<li>混杂模式下可以设置行内元素的高度，而标准模式下不生效。</li>
+<li>混杂模式下设置图片<code>padding</code>会失效。</li>
+<li>混杂模式下<code>Table</code>中的字体属性不能继承上层的设置。</li>
+<li>混杂模式下<code>white-space: pre</code>会失效。</li>
+</ol>
+<h2 id="meta详解"><a href="#meta详解" class="headerlink" title="meta详解"></a>meta详解</h2><ul>
+<li><code>&lt;meta&gt;</code> 标签位于文档的头部，不包含任何内容。<code>&lt;meta&gt;</code> 标签的属性定义了与文档相关联的名称/值对。</li>
+<li><code>&lt;meta&gt;</code> 元素可提供有关页面的元信息（meta-information），比如针对搜索引擎和更新频度的描述和关键词。</li>
+<li><code>&lt;meta&gt;</code>由两个属性组成，分别是http-equiv属性和name属性</li>
+</ul>
+<h3 id="http-equiv属性"><a href="#http-equiv属性" class="headerlink" title="http-equiv属性"></a>http-equiv属性</h3><p>http的头文件作用，指示服务器在发送实际的文档之前先在要传送给浏览器的 MIME 文档头部包含名称/值对。<code>&lt;meta http-equiv=&quot;参数&quot; content=&quot;具体的描述&quot;&gt;</code></p>
+<ol>
+<li><p>X-UA-Compatible（浏览器采用何种版本渲染当前页面），一般都设置为最新模式，在各大框架中也很常见。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"IE=edge,chrome=1"</span>/&gt;</span> // 指定IE和Chrome使用最新版本渲染当前页面</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>cache-control（指定请求和相应遵循的缓存机制），指导浏览器如何缓存某个响应以及缓存多长时间。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"cache-control"</span> <span class="attr">content</span>=<span class="string">"no-cache"</span>&gt;</span></span><br><span class="line">// content有很多属性，no-cache表示先发送请求，与服务器确认该资源是否被更改，如果未被更改，则使用缓存</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>expires（网页到期时间），用于设定网页的到期时间，过期后网页必须到服务器上重新传输。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"expires"</span> <span class="attr">content</span>=<span class="string">"Sunday 26 October 2016 01:00 GMT"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>refresh（自动刷新并指向某页面），网页将在设定的时间内自动刷新并调向设定的网址。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"refresh"</span> <span class="attr">content</span>=<span class="string">"2; URL=http://..."</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Set-Cookie（cookie设定），如果网页到期，那么网页存在本地的cookie也会被删除。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Set-Cookie"</span> <span class="attr">content</span>=<span class="string">"name, data"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>mobile-agent（开放手机适配）</p>
+<blockquote>
+<p>站点如果自行适配困难，可以在PC页面中做简单改造，百度协助实现适配效果。即：站长在站点PC页的源代码头部嵌入一行或多行Meta信息，由Meta信息来指明该PC页对应手机页的URL，以及该URL对应页面的格式，百度将根据用户终端类型选择最适合展示的页面</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"mobile-agent"</span><span class="attr">content</span>=<span class="string">"format=[wml|xhtml|html5]; url=url"</span>&gt;</span></span><br><span class="line">// [wml|xhtml|html5]——根据手机页的协议语言，选择中的一种。</span><br><span class="line">// url=url ——后者代表当前PC页所对应的手机页url，两者必须是一一对应关系（而不是统一对应至手机站首页）</span><br></pre></td></tr></table></figure>
+</blockquote>
+</li>
+</ol>
+<h3 id="name属性"><a href="#name属性" class="headerlink" title="name属性"></a>name属性</h3><p>name属性主要用于描述网页，与之对应的是content，content是对name的具体描述，便于引擎抓取。<code>&lt;meta name=&quot;参数&quot; content=&quot;具体的描述&quot;&gt;</code></p>
+<ol>
+<li><p>keywords（关键字），用于告诉搜索引擎网站的关键字，在搜索引擎中输入keywords中写的内容，即可搜索到网页。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"keywords"</span> <span class="attr">content</span>=<span class="string">"博客"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>description（网站内容描述），用于告诉引擎网站的主要内容，在根据关键字搜索出网页后，会显示description中的内容。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"description"</span> <span class="attr">content</span>=<span class="string">"博客介绍..."</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>viewport（移动端的窗口），这属于移动端页面会用到的属性，控制网页在移动端有较好的显示。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>robots（定义搜索引擎爬虫的索引方式），告诉爬虫哪些页面需要索引，哪些页面不需要索引。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"robots"</span> <span class="attr">content</span>=<span class="string">"none"</span>&gt;</span></span><br><span class="line">// 其中content的值有很多，none表示搜索引擎将忽略此网页</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>author（作者），用于标注网页作者</p>
+</li>
+<li>generate（网页制作软件），用于标注网站的编码软件</li>
+<li>copyright（版权），用于注明网页的版权所有</li>
+<li><p>revisit-after（搜索引擎爬虫搜索时间），如果页面不是经常更新，为了减少搜索引擎爬虫对服务器带来的压力，可以设置一个爬虫访问时间。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"revisit-after"</span> <span class="attr">content</span>=<span class="string">"7 days"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>renderer（双核浏览器渲染方式），指定双核浏览器用哪种方式渲染。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"renderer"</span> <span class="attr">content</span>=<span class="string">"webkit"</span>&gt;</span> // 默认webkit内核</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="HTML语义化"><a href="#HTML语义化" class="headerlink" title="HTML语义化"></a>HTML语义化</h2><h3 id="什么是语义化"><a href="#什么是语义化" class="headerlink" title="什么是语义化"></a>什么是语义化</h3><p>根据内容的结构（内容语义化），选择合适的标签（代码语义化）便于开发者阅读和写出优雅的代码同时让浏览器的爬虫和机器很好地解析。</p>
+<h3 id="语义化优点"><a href="#语义化优点" class="headerlink" title="语义化优点"></a>语义化优点</h3><ul>
+<li>易于用户阅读，样式丢失的时候能让页面呈现清晰的结构</li>
+<li>有利于seo，搜索引擎根据标签来确定上下文和各个关键字的权重</li>
+<li>方便其它设备解析，如盲人阅读器根据语义渲染网页</li>
+<li>有利于开发和维护，语义化更具可读性，代码更好维护，与css3关系更和谐</li>
+</ul>
+<h2 id="href和src的区别"><a href="#href和src的区别" class="headerlink" title="href和src的区别"></a>href和src的区别</h2><h3 id="请求资源不同"><a href="#请求资源不同" class="headerlink" title="请求资源不同"></a>请求资源不同</h3><ol>
+<li>href是Hypertext Reference的缩写，表示超文本引用。用来建立当前元素和文档之间的连接。</li>
+<li>在请求src资源时会将其指向的资源下载并应用到文档中。</li>
+</ol>
+<h3 id="作用结果不同"><a href="#作用结果不同" class="headerlink" title="作用结果不同"></a>作用结果不同</h3><ol>
+<li>href用于当前文档和引用资源之间建立联系。</li>
+<li>src用于替换当前内容。</li>
+</ol>
+<h3 id="浏览器解析方式不同"><a href="#浏览器解析方式不同" class="headerlink" title="浏览器解析方式不同"></a>浏览器解析方式不同</h3><ol>
+<li>若在文档中添加href，浏览器会识别该文档为css文件，并行下载资源并且不会停止对当前文档的处理。这也是为什么推荐使用<code>link</code>方式加载css，而不是<code>@import</code>方式。<blockquote>
+<p>link是XHTML标签，除了可以加载css，还可定义RSS等其它事务；而@import属于css，只可以加载css。<br>link引用css时，在页面载入同时加载；@import需要等页面加载完成后再加载。<br>link是XHTML标签无兼容问题；@import是在css2.1提出，低版本浏览器不支持。<br>link支持JavaScript控制DOM改变样式，而@import不支持。</p>
+</blockquote>
+</li>
+<li>当浏览器解析到src，会暂停其他资源的下载和处理，直到将该资源加载、编译、执行完毕，图片和框架等也如此，类似于将所指向资源应用到当前内容。这也是为什么建议把 js 脚本放在底部而不是头部的原因。</li>
+</ol>
+<h2 id="块级元素和行内元素"><a href="#块级元素和行内元素" class="headerlink" title="块级元素和行内元素"></a>块级元素和行内元素</h2><h3 id="块级元素"><a href="#块级元素" class="headerlink" title="块级元素"></a>块级元素</h3><ul>
+<li>独占一行，不与其它元素并列</li>
+<li>可以容纳内联元素和其它块元素</li>
+<li>可控制宽高以及外边距和内边距，如果不设置宽度则默认为父级的100%</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">标签</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>div</code></td>
+<td>定义文档中的分区或节</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>p</code></td>
+<td>定义段落</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>pre</code></td>
+<td>定义预格式文本</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>h1</code>-<code>h6</code></td>
+<td>定义 html 标题</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>ul</code></td>
+<td>定义无序列表</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>ol</code></td>
+<td>定义有序列表</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>li</code></td>
+<td>定义列表的项目</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>hr</code></td>
+<td>定义水平线</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>section</code></td>
+<td>定义section</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>form</code></td>
+<td>定义供用户输入的 html 表单</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>table</code></td>
+<td>定义表格</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>tbody</code></td>
+<td>定义表格中的主体内容</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>td</code></td>
+<td>定义表格中的单元</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>th</code></td>
+<td>定义表格中的表头单元格</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>thead</code></td>
+<td>定义表格中的表头内容</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>tfoot</code></td>
+<td>定义表格的页脚(脚注或表注)</td>
+</tr>
+<tr>
+<td style="text-align:center">。。。</td>
+<td>。。。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="行内元素"><a href="#行内元素" class="headerlink" title="行内元素"></a>行内元素</h3><ul>
+<li>与其它行内元素并列</li>
+<li>不能设置宽高，默认宽度为文字宽度</li>
+<li>内联元素只能容纳文本或其它内联元素</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">标签</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>a</code></td>
+<td>定义超链接</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>b</code></td>
+<td>定义粗体字</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>i</code></td>
+<td>定义斜体字</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>br</code></td>
+<td>定义换行</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>button</code></td>
+<td>定义按钮</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>img</code></td>
+<td>定义图像</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>imput</code></td>
+<td>定义输入控件</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>label</code></td>
+<td>定义 input 元素的标注</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>q</code></td>
+<td>标记一个短的引用</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>select</code></td>
+<td>定义选择列表（下拉列表）</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>small</code></td>
+<td>定义小号文本</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>span</code></td>
+<td>组合文档中的行内元素</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>strong</code></td>
+<td>定义强调文本</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>sub</code></td>
+<td>定义下标文本</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>sup</code></td>
+<td>定义上标文本</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>textarea</code></td>
+<td>定义多行的文本输入控件</td>
+</tr>
+<tr>
+<td style="text-align:center">。。。</td>
+<td>。。。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="块级元素和行内元素的相互转换"><a href="#块级元素和行内元素的相互转换" class="headerlink" title="块级元素和行内元素的相互转换"></a>块级元素和行内元素的相互转换</h3><p>可以通过display属性将块级元素(比如div)和行内元素进行相互转换</p>
+<ul>
+<li>使用display: inline设置对象做为行内元素显示</li>
+<li>使用display: block设置对象为块级元素显示</li>
+<li>使用display: inline-block设置对象为行内块元素。（CSS2.1 新增的值）</li>
+</ul>
+<h2 id="盒模型"><a href="#盒模型" class="headerlink" title="盒模型"></a>盒模型</h2><p>页面渲染时，dom 元素所采用的布局模型。可通过<code>box-sizing</code>进行设置。</p>
+<ul>
+<li>content-box (W3C 标准盒模型)： 盒模型的宽高等于 内容(content) 的宽高</li>
+<li>border-box (IE 盒模型)： 盒模型的宽高等于 内容(content) + 填充(padding) + 边框(border) 的总宽高</li>
+<li>padding-box： 盒模型的宽高等于 内容(content) + 填充(padding) 的总宽高</li>
+</ul>
+<h2 id="伪类"><a href="#伪类" class="headerlink" title="伪类"></a>伪类</h2><h3 id="超链接"><a href="#超链接" class="headerlink" title="超链接"></a>超链接</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:link</span> <span class="comment">/* 未访问的链接 */</span></span><br><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:visited</span> <span class="comment">/* 已访问的链接 */</span></span><br><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:hover</span> <span class="comment">/* 当有鼠标悬停在链接上 */</span></span><br><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:active</span> <span class="comment">/* 被选择的链接 */</span></span><br><span class="line"><span class="comment">/* 在 CSS 定义中，a:hover 必须位于 a:link 和 a:visited 之后，这样才能生效！ */</span></span><br><span class="line"><span class="comment">/* 在 CSS 定义中，a:active 必须位于 a:hover 之后，这样才能生效！ */</span></span><br></pre></td></tr></table></figure>
+<h3 id="选择器"><a href="#选择器" class="headerlink" title="选择器"></a>选择器</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">p</span><span class="selector-pseudo">:nth-child(odd)</span> <span class="comment">/* 匹配下标是偶数的子元素 */</span></span><br><span class="line"><span class="selector-tag">p</span><span class="selector-pseudo">:nth-child(even)</span> <span class="comment">/* 匹配下标是奇数的子元素 */</span></span><br><span class="line"><span class="selector-tag">p</span><span class="selector-pseudo">:nth-child(an</span> + <span class="selector-tag">b</span>) <span class="comment">/* n 是计数器（从 0 开始），b 是偏移值 */</span></span><br><span class="line"><span class="selector-tag">li</span><span class="selector-pseudo">:nth-child(n</span> + 6) <span class="comment">/* 选中从第6个开始的子元素 */</span></span><br><span class="line"><span class="selector-tag">li</span><span class="selector-pseudo">:nth-child(-n</span> + 6) <span class="comment">/* 选中从第1个到第6个子元素 */</span></span><br></pre></td></tr></table></figure>
+
+    </article>
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href="/2020/09/10/serviceDeploy/" title="线上部署">
+                    <div class="nextTitle">线上部署</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2020/09/10/jsPattern/" title="js设计模式">
+                    <div class="prevTitle">js设计模式</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:154387597@qq.com" class="iconfont-archer email" title="email"></a>
+            
+        
+    
+        
+            
+                <a href="https://github.com/c154387597" class="iconfont-archer github" target="_blank" title="github"></a>
+            
+        
+    
+        
+            
+                <span class="iconfont-archer wechat" title="wechat">
+                  
+                  <img class="profile-qr" src="/assets/example_qr.png">
+                </span>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#严格模式与混杂模式"><span class="toc-number">1.</span> <span class="toc-text">严格模式与混杂模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Doctype作用"><span class="toc-number">1.1.</span> <span class="toc-text">Doctype作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何区分严格模式和混杂模式"><span class="toc-number">1.2.</span> <span class="toc-text">如何区分严格模式和混杂模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#严格模式与混杂模式的语句解析不同点"><span class="toc-number">1.3.</span> <span class="toc-text">严格模式与混杂模式的语句解析不同点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#meta详解"><span class="toc-number">2.</span> <span class="toc-text">meta详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#http-equiv属性"><span class="toc-number">2.1.</span> <span class="toc-text">http-equiv属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#name属性"><span class="toc-number">2.2.</span> <span class="toc-text">name属性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTML语义化"><span class="toc-number">3.</span> <span class="toc-text">HTML语义化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是语义化"><span class="toc-number">3.1.</span> <span class="toc-text">什么是语义化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#语义化优点"><span class="toc-number">3.2.</span> <span class="toc-text">语义化优点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#href和src的区别"><span class="toc-number">4.</span> <span class="toc-text">href和src的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#请求资源不同"><span class="toc-number">4.1.</span> <span class="toc-text">请求资源不同</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#作用结果不同"><span class="toc-number">4.2.</span> <span class="toc-text">作用结果不同</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#浏览器解析方式不同"><span class="toc-number">4.3.</span> <span class="toc-text">浏览器解析方式不同</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#块级元素和行内元素"><span class="toc-number">5.</span> <span class="toc-text">块级元素和行内元素</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#块级元素"><span class="toc-number">5.1.</span> <span class="toc-text">块级元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#行内元素"><span class="toc-number">5.2.</span> <span class="toc-text">行内元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#块级元素和行内元素的相互转换"><span class="toc-number">5.3.</span> <span class="toc-text">块级元素和行内元素的相互转换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#盒模型"><span class="toc-number">6.</span> <span class="toc-text">盒模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#伪类"><span class="toc-number">7.</span> <span class="toc-text">伪类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#超链接"><span class="toc-number">7.1.</span> <span class="toc-text">超链接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#选择器"><span class="toc-number">7.2.</span> <span class="toc-text">选择器</span></a></li></ol></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="tab-name">目录</span></li>
+        <li class="sidebar-tab-tags"><span class="tab-name">标签</span></li>
+        <!-- <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li> -->
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 11
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/10</span><a class="archive-post-title" href="/2020/09/10/webInterview-1/">前端基本知识（一）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/10</span><a class="archive-post-title" href="/2020/09/10/serviceDeploy/">线上部署</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/10</span><a class="archive-post-title" href="/2020/09/10/webInterview-2/">前端基本知识（二）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/10</span><a class="archive-post-title" href="/2020/09/10/jsObject/">javascript面向对象</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/10</span><a class="archive-post-title" href="/2020/09/10/jsArray/">js数组技巧</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/10</span><a class="archive-post-title" href="/2020/09/10/jsClosure/">javascript闭包</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/10</span><a class="archive-post-title" href="/2020/09/10/jsDeepClone/">js深拷贝和浅拷贝</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/10</span><a class="archive-post-title" href="/2020/09/10/jsPattern/">js设计模式</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/10</span><a class="archive-post-title" href="/2020/09/10/jsOptimize/">javascript优化</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/10</span><a class="archive-post-title" href="/2020/09/10/algorithm/">前端算法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/10</span><a class="archive-post-title" href="/2020/09/10/jsKnowledge-1/">javascript变量提升</a>
+        </li>
+    
+    </ul></div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="javascript"><span class="iconfont-archer">&#xe606;</span>javascript</span>
+    
+        <span class="sidebar-tag-name" data-tags="web"><span class="iconfont-archer">&#xe606;</span>web</span>
+    
+        <span class="sidebar-tag-name" data-tags="service"><span class="iconfont-archer">&#xe606;</span>service</span>
+    
+        <span class="sidebar-tag-name" data-tags="http"><span class="iconfont-archer">&#xe606;</span>http</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br>
+    1、请确保node版本大于6.2<br>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "CL"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+
